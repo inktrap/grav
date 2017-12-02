@@ -280,7 +280,7 @@ class Pages
      */
     public function sort(Page $page, $order_by = null, $order_dir = null, $sort_flags = null)
     {
-        $this->grav['debugger']->addMessage("Debugging sort(): ");
+        dump("Debugging sort(): ");
         if ($order_by === null) {
             $order_by = $page->orderBy();
         }
@@ -319,7 +319,7 @@ class Pages
      */
     public function sortCollection(Collection $collection, $orderBy, $orderDir = 'asc', $orderManual = null, $sort_flags = null)
     {
-        $this->grav['debugger']->addMessage("Debugging sortCollection(): ");
+        dump("Debugging sortCollection(): ");
         $items = $collection->toArray();
         if (!$items) {
             return [];
@@ -924,14 +924,14 @@ class Pages
 
             list($this->instances, $this->routes, $this->children, $taxonomy_map, $this->sort) = $cache->fetch($this->pages_cache_id);
             if (!$this->instances) {
-                $this->grav['debugger']->addMessage('Page cache missed, rebuilding pages..');
+                dump('Page cache missed, rebuilding pages..');
 
                 // recurse pages and cache result
                 $this->resetPages($pages_dir, $this->pages_cache_id);
 
             } else {
                 // If pages was found in cache, set the taxonomy
-                $this->grav['debugger']->addMessage('Page cache hit.');
+                dump('Page cache hit.');
                 $taxonomy->taxonomy($taxonomy_map);
             }
         } else {
@@ -1183,10 +1183,10 @@ class Pages
     {
 
         $this_params = array('path' => $path, 'pages' => $pages, 'order_by' => $order_by, 'manual' => $manual, 'sort_flags' => $sort_flags);
-        $this->grav['debugger']->addMessage("Debugging buildSort: ");
+        dump("Debugging buildSort: ");
         foreach ($this_params as $key => $value) {
-            $this->grav['debugger']->addMessage($key);
-            $this->grav['debugger']->addMessage($value);
+            dump($key);
+            dump($value);
         }
 
         $list = [];
