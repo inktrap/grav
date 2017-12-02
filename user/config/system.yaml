@@ -13,7 +13,7 @@ pages:
     date: 'Y-m-dTH:i:sO'
 
 cache:
-  enabled: true
+  enabled: false
 twig:
   cache: false                          # Set to true to enable twig caching
 
