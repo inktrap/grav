@@ -280,6 +280,7 @@ class Pages
      */
     public function sort(Page $page, $order_by = null, $order_dir = null, $sort_flags = null)
     {
+        $this->grav['debugger']->addMessage("Debugging sort(): ");
         if ($order_by === null) {
             $order_by = $page->orderBy();
         }
@@ -318,6 +319,7 @@ class Pages
      */
     public function sortCollection(Collection $collection, $orderBy, $orderDir = 'asc', $orderManual = null, $sort_flags = null)
     {
+        $this->grav['debugger']->addMessage("Debugging sortCollection(): ");
         $items = $collection->toArray();
         if (!$items) {
             return [];
@@ -1186,7 +1188,6 @@ class Pages
             $this->grav['debugger']->addMessage($key);
             $this->grav['debugger']->addMessage($value);
         }
-        // array($collection, $orderBy, $orderDir, $orderManual, $sort_flags);
 
         $list = [];
         $header_default = null;
