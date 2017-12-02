@@ -1179,6 +1179,15 @@ class Pages
      */
     protected function buildSort($path, array $pages, $order_by = 'default', $manual = null, $sort_flags = null)
     {
+
+        $this_params = array('path' => $path, 'pages' => $pages, 'order_by' => $order_by, 'manual' => $manual, 'sort_flags' => $sort_flags);
+        $this->grav['debugger']->addMessage("Debugging buildSort: ");
+        foreach ($this_params as $key => $value) {
+            $this->grav['debugger']->addMessage($key);
+            $this->grav['debugger']->addMessage($value);
+        }
+        // array($collection, $orderBy, $orderDir, $orderManual, $sort_flags);
+
         $list = [];
         $header_default = null;
         $header_query = null;

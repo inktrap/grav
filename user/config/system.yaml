@@ -1,45 +1,21 @@
-absolute_urls: false
+
+timezone: 'Europe/Berlin'
 
 home:
-  alias: '/home'
+  alias: /blog
 
 pages:
   theme: antimatter
-  markdown:
-    extra: false
-  process:
-    markdown: true
-    twig: false
+  order:
+    by: header.time.start
+    dir: asc
+  dateformat:
+    date: 'Y-m-dTH:i:sO'
 
 cache:
   enabled: true
-  check:
-    method: file
-  driver: auto
-  prefix: 'g'
-
 twig:
-  cache: true
-  debug: true
-  auto_reload: true
-  autoescape: false
-
-assets:
-  css_pipeline: false
-  css_minify: true
-  css_rewrite: true
-  js_pipeline: false
-  js_minify: true
-
-errors:
-  display: true
-  log: true
+  cache: false                          # Set to true to enable twig caching
 
 debugger:
-  enabled: false
-  twig: true
-  shutdown:
-    close_connection: true
-gpm:
-  releases: stable
-  verify_peer: true
+  enabled: true                        # Enable Grav debugger and following settings
