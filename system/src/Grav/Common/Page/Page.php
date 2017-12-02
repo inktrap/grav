@@ -1574,7 +1574,8 @@ class Page
      */
     public function order($var = null)
     {
-        $this->grav['debugger']->addMessage("Debugging Page->order(): ");
+        $grav = Grav::instance();
+        $grav['debugger']->addMessage("Debugging Page->order(): ");
         if ($var !== null) {
             $order = !empty($var) ? sprintf('%02d.', (int)$var) : '';
             $this->folder($order . preg_replace(PAGE_ORDER_PREFIX_REGEX, '', $this->folder));
@@ -2012,7 +2013,8 @@ class Page
      */
     public function orderDir($var = null)
     {
-        $this->grav['debugger']->addMessage("Debugging Page->orderDir(): ");
+        $grav = Grav::instance();
+        $grav['debugger']->addMessage("Debugging Page->orderDir(): ");
         if ($var !== null) {
             $this->order_dir = $var;
         }
@@ -2038,7 +2040,8 @@ class Page
     public function orderBy($var = null)
     {
 
-        $this->grav['debugger']->addMessage("Debugging Page->orderBy(): ");
+        $grav = Grav::instance();
+        $grav['debugger']->addMessage("Debugging Page->orderBy(): ");
         if ($var !== null) {
             $this->order_by = $var;
         }
@@ -2055,7 +2058,8 @@ class Page
      */
     public function orderManual($var = null)
     {
-        $this->grav['debugger']->addMessage("Debugging Page->orderManual(): ");
+        $grav = Grav::instance();
+        $grav['debugger']->addMessage("Debugging Page->orderManual(): ");
         if ($var !== null) {
             $this->order_manual = $var;
         }
@@ -2814,7 +2818,8 @@ class Page
      */
     protected function doReorder($new_order)
     {
-        $this->grav['debugger']->addMessage("Debugging Page->doReorder(): ");
+        $grav = Grav::instance();
+        $grav['debugger']->addMessage("Debugging Page->doReorder(): ");
         if (!$this->_original) {
             return;
         }
