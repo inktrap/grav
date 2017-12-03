@@ -22,7 +22,7 @@ start: 2017-%02d-%02dT18:00:00+0100
 ===
 
 Content.
-' "$month" "$day" "$LINE" "$month" "$day" "$month" "$day" > "$line/item.md"
+' "$month" "$day" "$month" "$day" "$month" "$day" > "$line/item.md"
     done
 done
 
