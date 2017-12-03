@@ -2,7 +2,7 @@
 
 rm -rf [0-9]*
 # <28 is fine
-for day in $(seq 1 27); do
+for day in $(seq 1 5); do
     for month in $(seq 1 1); do
         line=""
         while [[ -d $line || $line == "" ]]; do
