@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 rm -rf [0-9]*
-for day in $(seq 1 30); do
+# <28 is fine
+for day in $(seq 1 27); do
     for month in $(seq 1 1); do
         line=""
         while [[ -d $line || $line == "" ]]; do
