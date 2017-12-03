@@ -1186,7 +1186,11 @@ class Pages
         dump("Debugging buildSort: ");
         foreach ($this_params as $key => $value) {
             dump($key);
-            dump($value);
+            if ($key == 'pages') {
+                dump(count($value));
+            } else {
+                dump($value);
+            }
         }
 
         $list = [];
