@@ -281,6 +281,16 @@ class Pages
     public function sort(Page $page, $order_by = null, $order_dir = null, $sort_flags = null)
     {
         dump("Debugging sort(): ");
+        $this_params = array('page' => $page,
+            'order_by' => $order_by,
+            'order_dir' => $order_dir,
+            'sort_flags' => $sort_flags);
+
+        foreach ($this_params as $key => $value) {
+            dump($key);
+            dump($value);
+        }
+
         if ($order_by === null) {
             $order_by = $page->orderBy();
         }
