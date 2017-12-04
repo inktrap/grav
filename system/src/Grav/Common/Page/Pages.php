@@ -280,16 +280,16 @@ class Pages
      */
     public function sort(Page $page, $order_by = null, $order_dir = null, $sort_flags = null)
     {
-        dump("Debugging sort(): ");
+        // dump("Debugging sort(): ");
         $this_params = array('page' => $page,
             'order_by' => $order_by,
             'order_dir' => $order_dir,
             'sort_flags' => $sort_flags);
 
-        foreach ($this_params as $key => $value) {
-            dump($key);
-            dump($value);
-        }
+        //foreach ($this_params as $key => $value) {
+        //    dump($key);
+        //    dump($value);
+        //}
 
         if ($order_by === null) {
             $order_by = $page->orderBy();
@@ -330,6 +330,14 @@ class Pages
     public function sortCollection(Collection $collection, $orderBy, $orderDir = 'asc', $orderManual = null, $sort_flags = null)
     {
         dump("Debugging sortCollection(): ");
+        dump(" - Parameters");
+        dump($collection);
+        dump($orderBy);
+        dump($orderDir);
+        dump($orderManual);
+        dump($sort_flags);
+        dump(" - End Parameters");
+
         $items = $collection->toArray();
         if (!$items) {
             return [];
@@ -346,6 +354,9 @@ class Pages
             $sort = array_reverse($sort);
         }
 
+        dump(" - Sort Result");
+        dump($sort);
+        dump("End Debugging sortCollection()");
         return $sort;
 
     }
@@ -1193,15 +1204,15 @@ class Pages
     {
 
         $this_params = array('path' => $path, 'pages' => $pages, 'order_by' => $order_by, 'manual' => $manual, 'sort_flags' => $sort_flags);
-        dump("Debugging buildSort: ");
-        foreach ($this_params as $key => $value) {
-            dump($key);
-            if ($key == 'pages') {
-                dump(count($value));
-            } else {
-                dump($value);
-            }
-        }
+        //dump("Debugging buildSort: ");
+        //foreach ($this_params as $key => $value) {
+        //    dump($key);
+        //    if ($key == 'pages') {
+        //        dump(count($value));
+        //    } else {
+        //        dump($value);
+        //    }
+        //}
 
         $list = [];
         $header_default = null;

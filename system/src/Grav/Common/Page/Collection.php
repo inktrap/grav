@@ -223,8 +223,6 @@ class Collection extends Iterator
      */
     public function order($by, $dir = 'asc', $manual = null, $sort_flags = null)
     {
-
-        dump("Debugging order()");
         $this->items = $this->pages->sortCollection($this, $by, $dir, $manual, $sort_flags);
 
         return $this;
