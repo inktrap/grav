@@ -1340,6 +1340,8 @@ class Pages
                 dump("intl not loaded");
                 dump("using asort");
                 dump("sort flags:");
+                dump("list is");
+                dump($list);
                 dump($sort_flags);
                 asort($list, $sort_flags);
             }
