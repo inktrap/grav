@@ -345,6 +345,7 @@ class Pages
 
         $lookup = md5(json_encode($items) . json_encode($orderManual) . $orderBy . $orderDir);
         if (!isset($this->sort[$lookup][$orderBy])) {
+            dump("Building sort, lookup not found");
             $this->buildSort($lookup, $items, $orderBy, $orderManual, $sort_flags);
         }
 
@@ -1204,15 +1205,13 @@ class Pages
     {
 
         $this_params = array('path' => $path, 'pages' => $pages, 'order_by' => $order_by, 'manual' => $manual, 'sort_flags' => $sort_flags);
-        //dump("Debugging buildSort: ");
-        //foreach ($this_params as $key => $value) {
-        //    dump($key);
-        //    if ($key == 'pages') {
-        //        dump(count($value));
-        //    } else {
-        //        dump($value);
-        //    }
-        //}
+        dump("Debugging buildSort: ");
+        dump(" - Params:");
+        foreach ($this_params as $key => $value) {
+            dump($key);
+            dump($value);
+        }
+        dump(" - End Params:");
 
         $list = [];
         $header_default = null;
@@ -1220,9 +1219,11 @@ class Pages
 
         // do this header query work only once
         if (strpos($order_by, 'header.') === 0) {
+            dump(" * Header query");
             $header_query = explode('|', str_replace('header.', '', $order_by));
             if (isset($header_query[1])) {
                 $header_default = $header_query[1];
+                dump($header_default);
             }
         }
 
@@ -1234,34 +1235,43 @@ class Pages
 
             switch ($order_by) {
                 case 'title':
+                    dump("title");
                     $list[$key] = $child->title();
                     break;
                 case 'date':
+                    dump("date");
                     $list[$key] = $child->date();
                     $sort_flags = SORT_REGULAR;
                     break;
                 case 'modified':
+                    dump("modified");
                     $list[$key] = $child->modified();
                     $sort_flags = SORT_REGULAR;
                     break;
                 case 'publish_date':
+                    dump("publish_date");
                     $list[$key] = $child->publishDate();
                     $sort_flags = SORT_REGULAR;
                     break;
                 case 'unpublish_date':
+                    dump("unpublish_date");
                     $list[$key] = $child->unpublishDate();
                     $sort_flags = SORT_REGULAR;
                     break;
                 case 'slug':
+                    dump("slug");
                     $list[$key] = $child->slug();
                     break;
                 case 'basename':
+                    dump("basename");
                     $list[$key] = basename($key);
                     break;
                 case 'folder':
+                    dump("folder");
                     $list[$key] = $child->folder();
                     break;
                 case (is_string($header_query[0])):
+                    dump("header_query");
                     $child_header = new Header((array)$child->header());
                     $header_value = $child_header->get($header_query[0]);
                     if (is_array($header_value)) {
@@ -1274,23 +1284,30 @@ class Pages
                     $sort_flags = $sort_flags ?: SORT_REGULAR;
                     break;
                 case 'manual':
+                    dump("manual");
                 case 'default':
+                    dump("case: default");
                 default:
+                    dump("case: default:");
                     $list[$key] = $key;
                     $sort_flags = $sort_flags ?: SORT_REGULAR;
             }
         }
 
         if (!$sort_flags) {
+            dump("No sort flags");
             $sort_flags = SORT_NATURAL | SORT_FLAG_CASE;
         }
 
         // handle special case when order_by is random
         if ($order_by === 'random') {
+            dump("Sort order is random");
             $list = $this->arrayShuffle($list);
         } else {
             // else just sort the list according to specified key
+            dump("Sort order by key");
             if (extension_loaded('intl')) {
+                dump("intl loaded");
                 $locale = setlocale(LC_COLLATE, 0); //`setlocale` with a 0 param returns the current locale set
                 $col = Collator::create($locale);
                 if ($col) {
@@ -1305,13 +1322,19 @@ class Pages
                     asort($list, $sort_flags);
                 }
             } else {
+                dump("intl not loaded");
+                dump("using asort");
+                dump("sort flags:");
+                dump($sort_flags);
                 asort($list, $sort_flags);
             }
+            dump("finished");
         }
 
 
         // Move manually ordered items into the beginning of the list. Order of the unlisted items does not change.
         if (is_array($manual) && !empty($manual)) {
+            dump("manual sort");
             $new_list = [];
             $i = count($manual);
 
@@ -1327,7 +1350,12 @@ class Pages
             $list = $new_list;
 
             // Apply manual ordering to the list.
+            dump("applied asort");
+            dump("list is");
+            dump($list);
             asort($list);
+            dump("asorted list is");
+            dump($list);
         }
 
         foreach ($list as $key => $sort) {
