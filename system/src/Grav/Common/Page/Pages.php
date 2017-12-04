@@ -1322,6 +1322,9 @@ class Pages
                         dump($list);
                     }
 
+                    dump("col->asort sort_flags");
+                    dump($sort_flags);
+                    dump($sort_flags);
                     $col->asort($list, $sort_flags);
                     dump("list is");
                     dump($list);
