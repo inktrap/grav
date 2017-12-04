@@ -1319,19 +1319,19 @@ class Pages
                             return sprintf('%032d.', $number[0]);
                         }, $list);
                         dump("list is");
-                        dump("$list");
+                        dump($list);
                     }
 
                     $col->asort($list, $sort_flags);
                     dump("list is");
-                    dump("$list");
+                    dump($list);
                 } else {
                     dump("not: bitwise and is sort natural");
                     dump("list is");
-                    dump("$list");
+                    dump($list);
                     asort($list, $sort_flags);
                     dump("list is");
-                    dump("$list");
+                    dump($list);
                 }
             } else {
                 dump("intl not loaded");
