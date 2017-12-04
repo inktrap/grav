@@ -1309,17 +1309,29 @@ class Pages
             if (extension_loaded('intl')) {
                 dump("intl loaded");
                 $locale = setlocale(LC_COLLATE, 0); //`setlocale` with a 0 param returns the current locale set
+                dump("locale");
+                dump($locale);
                 $col = Collator::create($locale);
                 if ($col) {
                     if (($sort_flags & SORT_NATURAL) === SORT_NATURAL) {
+                        dump("bitwise and is sort natural");
                         $list = preg_replace_callback('~([0-9]+)\.~', function($number) {
                             return sprintf('%032d.', $number[0]);
                         }, $list);
+                        dump("list is");
+                        dump("$list");
                     }
 
                     $col->asort($list, $sort_flags);
+                    dump("list is");
+                    dump("$list");
                 } else {
+                    dump("not: bitwise and is sort natural");
+                    dump("list is");
+                    dump("$list");
                     asort($list, $sort_flags);
+                    dump("list is");
+                    dump("$list");
                 }
             } else {
                 dump("intl not loaded");
