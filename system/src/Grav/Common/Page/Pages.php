@@ -329,14 +329,14 @@ class Pages
      */
     public function sortCollection(Collection $collection, $orderBy, $orderDir = 'asc', $orderManual = null, $sort_flags = null)
     {
-        dump("Debugging sortCollection(): ");
-        dump(" - Parameters");
-        dump($collection);
-        dump($orderBy);
-        dump($orderDir);
-        dump($orderManual);
-        dump($sort_flags);
-        dump(" - End Parameters");
+        //dump("Debugging sortCollection(): ");
+        //dump(" - Parameters");
+        //dump($collection);
+        //dump($orderBy);
+        //dump($orderDir);
+        //dump($orderManual);
+        //dump($sort_flags);
+        //dump(" - End Parameters");
 
         $items = $collection->toArray();
         if (!$items) {
@@ -345,7 +345,7 @@ class Pages
 
         $lookup = md5(json_encode($items) . json_encode($orderManual) . $orderBy . $orderDir);
         if (!isset($this->sort[$lookup][$orderBy])) {
-            dump("Building sort, lookup not found");
+            //dump("Building sort, lookup not found");
             $this->buildSort($lookup, $items, $orderBy, $orderManual, $sort_flags);
         }
 
@@ -1309,23 +1309,31 @@ class Pages
             if (extension_loaded('intl')) {
                 dump("intl loaded");
                 $locale = setlocale(LC_COLLATE, 0); //`setlocale` with a 0 param returns the current locale set
-                dump("locale");
-                dump($locale);
                 $col = Collator::create($locale);
                 if ($col) {
                     if (($sort_flags & SORT_NATURAL) === SORT_NATURAL) {
                         dump("bitwise and is sort natural");
-                        $list = preg_replace_callback('~([0-9]+)\.~', function($number) {
-                            return sprintf('%032d.', $number[0]);
-                        }, $list);
                         dump("list is");
+                        dump($list);
+                        $list = preg_replace_callback('~([0-9]+)\.~', function($number) { return sprintf('%032d.', $number[0]); }, $list);
+                        dump("list is now");
                         dump($list);
                     }
 
                     dump("col->asort sort_flags");
                     dump($sort_flags);
-                    dump($sort_flags);
+                    # default behaviour
                     $col->asort($list, $sort_flags);
+                    # ---
+                    //dump("list is");
+                    //dump($list);
+                    //$col->asort($list, Collator::SORT_REGULAR); #, $sort_flags);
+                    //dump("list is");
+                    //dump($list);
+                    //$col->asort($list, Collator::SORT_STRING); #, $sort_flags);
+                    //dump("list is");
+                    //dump($list);
+                    //$col->asort($list, Collator::SORT_NUMERIC); #, $sort_flags);
                     dump("list is");
                     dump($list);
                 } else {
@@ -1351,7 +1359,7 @@ class Pages
 
         // Move manually ordered items into the beginning of the list. Order of the unlisted items does not change.
         if (is_array($manual) && !empty($manual)) {
-            dump("manual sort");
+            //dump("manual sort");
             $new_list = [];
             $i = count($manual);
 
@@ -1367,12 +1375,12 @@ class Pages
             $list = $new_list;
 
             // Apply manual ordering to the list.
-            dump("applied asort");
-            dump("list is");
-            dump($list);
+            //dump("applied asort");
+            //dump("list is");
+            //dump($list);
             asort($list);
-            dump("asorted list is");
-            dump($list);
+            //dump("asorted list is");
+            //dump($list);
         }
 
         foreach ($list as $key => $sort) {
